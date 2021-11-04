@@ -141,3 +141,4 @@ $RECYCLE.BIN/
 *.lnk
 
 oauth-token.json
+auth

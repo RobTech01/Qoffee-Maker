@@ -17,7 +17,7 @@ class OrchestratorMachineStateHandler(IPythonHandler):
         connector = get_connector()
         proxy(
             self,
-            connector.get("/api/homeappliances/"+MACHINE_HA_ID+"/status/BSH.Common.Status.OperationState")
+            connector.get("/api/homeappliances/" + MACHINE_HA_ID + "/status/BSH.Common.Status.OperationState")
         )
 
 # get/set the HAID of the machine to use
@@ -37,6 +37,16 @@ class OrchestratorMachineHaIdHandler(IPythonHandler):
             "haid": MACHINE_HA_ID
         })
 
+# list HAIDs of the machines to use
+class OrchestratorListMachineHaIdHandler(IPythonHandler):
+    @web.authenticated
+    def get(self):
+        connector = get_connector()
+        proxy(
+            self,
+            connector.get("/api/homeappliances")
+        )
+
 # send a request to the coffee machine to create a drink
 class OrchestratorDrinkRequestHandler(IPythonHandler):
     @web.authenticated
@@ -55,7 +65,7 @@ class OrchestratorDrinkRequestHandler(IPythonHandler):
         # send put request
         proxy(
             self,
-            connector.put("/api/homeappliances/"+MACHINE_HA_ID+"/programs/active", {
+            connector.put("/api/homeappliances/" + MACHINE_HA_ID + "/programs/active", {
                 "data": {
                     "key": drinkKey,
                     "options": drinkOptionsList
